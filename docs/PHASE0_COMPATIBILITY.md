@@ -5,7 +5,7 @@
 ## محیط ساخت این نشست
 Ubuntu 24.04؛ بدون .NET SDK، SQL Server، Windows یا ابزار ساخت نصب‌کننده. نصب بسته‌ها غیرفعال بود.
 
-## نسخه‌ها (Proposed؛ با Build تأیید نشده)
+## نسخه‌ها (Backend و Shared در CI ساخته شدند؛ Desktop هنوز ساخته نشده)
 - Backend: .NET 10 (LTS)، SDK 10.0.1xx
 - Desktop: WPF روی .NET Framework 4.8 (نه 4.8.1، چون Windows 7 و 8.1 را پشتیبانی نمی‌کند)
 - Shared و Contracts: netstandard2.0

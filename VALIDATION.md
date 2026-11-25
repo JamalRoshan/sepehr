@@ -12,21 +12,24 @@
 | توازن پرانتز و آکولاد فایل‌های C# | Passed |
 | تجزیه YAML گردش‌کار | Passed |
 
-## Build و آزمون
-| مورد | وضعیت | دلیل |
+## Build و آزمون (GitHub Actions، Commit d94fcbb)
+شاهد: https://github.com/JamalRoshan/sepehr/actions/runs/45703046348
+
+| مورد | وضعیت | نتیجه |
 |---|---|---|
-| Restore و Build | Blocked | SDK در محیط نیست؛ نسخه بسته‌ها هم تأیید نشده |
-| آزمون واحد، معماری و سازگاری (net10.0) | NotRun | نیاز به SDK |
-| آزمون Shared روی net48 | NotRun | نیاز به Windows |
-| Migration و smoke.sql | NotRun | SQL Server نیست |
-| گردش‌کار CI | NotRun | هنوز روی GitHub اجرا نشده |
-| بررسی آسیب‌پذیری وابستگی‌ها | NotRun | نیاز به Restore |
+| Restore و Build (windows-latest) | Passed | 0 خطا، 0 هشدار |
+| Sepehr.Tests.Unit، net10.0 | Passed | 33 از 33 |
+| Sepehr.Tests.Compat، net10.0 | Passed | 13 از 13 |
+| Sepehr.Tests.Compat، net48 | Passed | 13 از 13 (روی Runner؛ نه Windows 7/8.1) |
+| Migration روی SQL Server 2022 (کانتینر Developer)، دو بار | Passed | بار دوم رد شد: already applied |
+| smoke.sql | Passed | SMOKE OK؛ عمق بیش از 3 و هم‌زمانی Sync را نمی‌آزماید |
+| بسته‌های آسیب‌پذیر (dotnet list package) | Passed | در منابع فعلی موردی گزارش نشد |
 
 ## ماتریس سند 06
 | ID | وضعیت |
 |---|---|
-| T01 تا T17 | NotRun (بیشتر قابلیت‌ها هنوز پیاده نشده‌اند) |
-| T18 معماری | NotRun (آزمون جزئی نوشته شده است) |
+| T01 تا T17 | NotRun به‌عنوان سناریوی کامل (بیشتر قابلیت‌ها هنوز پیاده نشده‌اند) |
+| T18 معماری | NotRun کامل؛ آزمون جزئی ارجاع پروژه‌ها Passed |
 | Windows 7 SP1 و 8.1 | Blocked |
 
 ## امنیت

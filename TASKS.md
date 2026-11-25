@@ -1,12 +1,14 @@
 # Tasks و ردیابی نیازمندی‌ها (شناسه‌ها ثابت‌اند)
 
+Build و آزمون بخش‌های T-003 تا T-008 در CI موفق بوده است؛ InProgress یعنی دامنه آن Task هنوز کامل نیست.
+
 وضعیت: NotStarted / InProgress / Blocked / Completed. «Completed» نیازمند شاهد اجراست،
 بنابراین کد نوشته‌شده‌ای که Build نشده InProgress است.
 
 | ID | کار | سند | وضعیت | مسیر / توضیح |
 |---|---|---|---|---|
 | T-001 | Phase 0 و اسپایک Win7/8.1 | 07 | Blocked | docs/PHASE0_COMPATIBILITY.md؛ اسپایک WPF ساخته نشده |
-| T-002 | Solution و تنظیمات Build | 02 | InProgress | Sepehr.sln |
+| T-002 | Solution و تنظیمات Build | 02 | Completed | Sepehr.sln (شش پروژه موجود)؛ CI Passed. افزودن پروژه‌های بعدی در Task خودشان |
 | T-003 | نرمال‌سازی فارسی و تاریخ شمسی | 01§19 | InProgress | src/Sepehr.Shared |
 | T-004 | قراردادها | 05 | InProgress | فقط enum، مسیرهای پایه، DTO ورود و پیام، رویدادهای Hub |
 | T-005 | قواعد دامنه: مجوز، حریم خصوصی، زیرگروه، رمز، قفل، نشست | 04 | InProgress | src/Sepehr.Domain |

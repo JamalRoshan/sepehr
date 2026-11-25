@@ -13,7 +13,7 @@
 ## تصمیم‌ها
 | ID | تصمیم | دلیل / اثر | وضعیت |
 |---|---|---|---|
-| D-01 | Backend روی .NET 10؛ Desktop روی net48 | LTS و الزام Win7/8.1 | Proposed تا Build |
+| D-01 | Backend روی .NET 10؛ Desktop روی net48 | LTS و الزام Win7/8.1 | Approved برای Backend و Shared (CI)؛ Desktop تا Build آن Proposed |
 | D-02 | Win7: فقط SSE/LongPolling | نبود ClientWebSocket | Proposed تا آزمون |
 | D-03 | گواهی ECDSA P-256 | TLS GCM با Windows 7 | Proposed تا آزمون |
 | D-04 | توکن Opaque، بدون Refresh Token؛ 30 دقیقه idle و سقف 12 ساعت | ساده و قابل ابطال؛ `/auth/refresh` اختیاری 05 ساخته نمی‌شود | Approved |
@@ -28,10 +28,12 @@
 | D-13 | پروژه خالی برای Api/Realtime/Application/Desktop/Web ساخته نمی‌شود | منع Placeholder | Approved |
 | D-14 | تصمیم قالب صوتی | نیازمند آزمون WPF و مرورگر | باز |
 
+| D-15 | مخزن jamalroshan/sepehr عمومی است و همه فایل‌ها شامل docs/spec ارسال شد | انتخاب صریح کارفرما. هیچ رمز یا کلید واقعی نباید Commit شود | Approved |
+
 ## Risk Register
 | ID | ریسک | اثر | اقدام |
 |---|---|---|---|
-| R-01 | کد هنوز کامپایل نشده | ممکن است خطای Build داشته باشد | اجرای CI پیش از هر توسعه بعدی |
+| R-01 | پوشش آزمون محدود به هسته | رفتار یکپارچه آزموده نشده | آزمون یکپارچه همراه API |
 | R-02 | Win7/8.1 آزمون نشده | پذیرش نهایی ممکن نیست | VM واقعی |
 | R-03 | LongPolling در Win7 بار بیشتر دارد | کارایی | آزمون بار با ترکیب واقعی |
 | R-04 | سیستم‌عامل‌ها و Runtimeهای قدیمی وصله امنیتی کامل ندارند | امنیت | تفکیک شبکه؛ ارزیابی سازمان |
