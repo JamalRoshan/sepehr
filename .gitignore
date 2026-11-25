@@ -1,0 +1,12 @@
+bin/
+obj/
+.vs/
+*.user
+TestResults/
+publish/
+appsettings.*.local.json
+appsettings.Production.json
+secrets.json
+*.pfx
+*.key
+*.bak

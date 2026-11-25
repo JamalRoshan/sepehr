@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- net48 فقط روی ویندوز اجرا می‌شود. اجرای آن جای آزمون Windows 7/8.1 را نمی‌گیرد. -->
+    <TargetFrameworks>net10.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">net48;net10.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Sepehr.Shared\Sepehr.Shared.csproj" />
+    <ProjectReference Include="..\..\src\Sepehr.Contracts\Sepehr.Contracts.csproj" />
+  </ItemGroup>
+</Project>

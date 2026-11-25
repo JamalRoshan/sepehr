@@ -1,0 +1,53 @@
+name: build-and-test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+      - run: dotnet restore Sepehr.sln
+      - run: dotnet build Sepehr.sln -c Release --no-restore
+      - run: dotnet test Sepehr.sln -c Release --no-build --logger trx --results-directory TestResults
+      - name: Dependency vulnerability report
+        run: dotnet list Sepehr.sln package --vulnerable --include-transitive
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: TestResults
+
+  database:
+    runs-on: ubuntu-latest
+    env:
+      # رمز یک‌بارمصرف کانتینر آزمایشی CI؛ در محیط واقعی استفاده نشود.
+      SQLCMDPASSWORD: Ci-${{ github.run_id }}-Aa!
+    services:
+      sql:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_PID: Developer
+          MSSQL_SA_PASSWORD: Ci-${{ github.run_id }}-Aa!
+        ports: ["1433:1433"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply migration (twice) and run constraint tests
+        run: |
+          run() { docker run --rm --network host -e SQLCMDPASSWORD -v "$PWD/database:/db" \
+            mcr.microsoft.com/mssql-tools \
+            /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -I -b "$@"; }
+          for i in $(seq 1 30); do run -Q "SELECT 1" >/dev/null 2>&1 && break; sleep 3; done
+          run -Q "CREATE DATABASE Sepehr COLLATE Persian_100_CI_AS_SC"
+          run -d Sepehr -i /db/migrations/0001_initial.sql
+          run -d Sepehr -i /db/migrations/0001_initial.sql
+          run -d Sepehr -i /db/tests/smoke.sql
