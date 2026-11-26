@@ -15,8 +15,8 @@ Build و آزمون بخش‌های T-003 تا T-008 در CI موفق بوده �
 | T-006 | Hash رمز، توکن، بررسی فایل | 01§18 | InProgress | src/Sepehr.Infrastructure؛ اسکن بدافزار و ذخیره‌سازی ندارد |
 | T-007 | Schema و Migration | 03 | InProgress | database/ |
 | T-008 | آزمون واحد، معماری و CI | 06 | InProgress | tests/ و .github/workflows |
-| T-010 | لایه Application و دسترسی داده (EF Core یا معادل) | 02 | NotStarted | |
-| T-011 | API: احراز هویت، نشست، Rate Limit، Audit، خطا، CorrelationId | 05 | NotStarted | |
+| T-010 | لایه Application و دسترسی داده (EF Core یا معادل) | 02 | InProgress | src/Sepehr.Application و Infrastructure/Data؛ فعلاً فقط احراز هویت |
+| T-011 | API: احراز هویت، نشست، Rate Limit، Audit، خطا، CorrelationId | 05 | Completed | src/Sepehr.Api؛ 18 آزمون یکپارچه Passed. TLS و IIS واقعی آزموده نشده |
 | T-012 | Wizard اتصال SQL و ساخت اولین مدیرکل | 08§13 | NotStarted | |
 | T-013 | کاربران و ورود Excel | 05§3 | NotStarted | |
 | T-014 | گروه، زیرگروه، عضویت و مجوز | 05§4 | NotStarted | |
@@ -27,7 +27,7 @@ Build و آزمون بخش‌های T-003 تا T-008 در CI موفق بوده �
 | T-019 | فضای شخصی، مخاطبان، Retention، تنظیمات، گزارش‌ها | 05§8 | NotStarted | |
 | T-020 | WPF net48: پیام‌رسان، کنسول مدیریت، Tray، Outbox محلی | 01§6.1 | NotStarted | |
 | T-021 | Web و پنل مدیریت (Bootstrap محلی، RTL) | 01§6.2 | NotStarted | فقط فونت آماده است |
-| T-022 | OpenAPI و آزمون یکپارچه و مجوز Endpointها | 06 | NotStarted | |
+| T-022 | OpenAPI و آزمون یکپارچه و مجوز Endpointها | 06 | InProgress | آزمون یکپارچه احراز هویت؛ OpenAPI ندارد |
 | T-023 | آزمون امنیت و بار (100 و 200 هم‌زمان) | 06 | NotStarted | |
 | T-024 | نصب‌کننده آفلاین، ارتقا و حذف | 07 | NotStarted | |
 | T-025 | راهنمای نصب، مدیر و کاربر؛ گزارش امنیت | 07 | NotStarted | |

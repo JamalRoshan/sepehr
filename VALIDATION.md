@@ -25,6 +25,21 @@
 | smoke.sql | Passed | SMOKE OK؛ عمق بیش از 3 و هم‌زمانی Sync را نمی‌آزماید |
 | بسته‌های آسیب‌پذیر (dotnet list package) | Passed | در منابع فعلی موردی گزارش نشد |
 
+## API احراز هویت (CP-003، Commit f50de7d)
+شاهد: https://github.com/JamalRoshan/sepehr/actions/runs/45763085895
+
+| مورد | وضعیت | نتیجه |
+|---|---|---|
+| Build کل Solution (windows-latest) | Passed | 0 خطا، 0 هشدار |
+| Sepehr.Tests.Unit، net10.0 | Passed | 35 از 35 |
+| Sepehr.Tests.Compat، net10.0 و net48 | Passed | هرکدام 13 از 13 |
+| Sepehr.Tests.Integration با SQL Server 2022 | Passed | 20 از 20 (18 API، 2 Schema: عمق گروه و ترتیب Commit در Sync) |
+| Migration دو بار و smoke.sql | Passed | SMOKE OK |
+| بسته‌های آسیب‌پذیر، همه پروژه‌ها | Passed | در منابع فعلی موردی گزارش نشد |
+
+آزمون‌های API با TestServer اجرا می‌شوند؛ Kestrel، گواهی TLS واقعی و IIS آزموده نشده‌اند.
+T03 در سطح API پوشش دارد؛ به‌عنوان سناریوی کامل (با کلاینت) همچنان NotRun است.
+
 ## ماتریس سند 06
 | ID | وضعیت |
 |---|---|

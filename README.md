@@ -10,7 +10,7 @@
 1. با هر Push گردش‌کار خودکار اجرا می‌شود.
 2. در تب Actions گردش‌کار `build-and-test` را ببینید.
    - `windows`: Restore، Build، آزمون روی net10.0 و بخش سازگاری روی net48، گزارش آسیب‌پذیری بسته‌ها
-   - `database`: دو بار اجرای Migration روی SQL Server 2022 و آزمون قیود
+   - `database`: دو بار اجرای Migration روی SQL Server 2022، آزمون قیود و آزمون یکپارچه API
 3. در صورت خطا، متن Log را همراه ZIP برای ادامه کار بفرستید.
 
 آزمون net48 روی Runner جای آزمون Windows 7 SP1 و 8.1 را نمی‌گیرد.
@@ -19,8 +19,14 @@
 ```
 dotnet restore Sepehr.sln
 dotnet build Sepehr.sln -c Release
-dotnet test Sepehr.sln -c Release
+dotnet test Sepehr.sln -c Release --filter "Category!=Integration"
 ```
+آزمون یکپارچه به SQL Server آزمایشی با اجازه ساخت و حذف دیتابیس نیاز دارد:
+```
+set SEPEHR_TEST_SQL=Server=localhost;Integrated Security=True;Encrypt=True;TrustServerCertificate=True
+dotnet test tests\Sepehr.Tests.Integration -c Release
+```
+`TrustServerCertificate=True` فقط برای محیط آزمایشی است.
 اجرای دیتابیس (SQL Server 2022 آزمایشی و خالی؛ Windows Authentication):
 ```
 sqlcmd -S . -E -I -b -Q "CREATE DATABASE Sepehr COLLATE Persian_100_CI_AS_SC"
@@ -30,8 +36,14 @@ sqlcmd -S . -E -I -b -f 65001 -d Sepehr -i database\tests\smoke.sql
 انتظار: `SMOKE OK`. نسخه تولید باید SQL Server Agent داشته باشد (Express پذیرفته نیست).
 پشتیبان‌گیری بر عهده زیرساخت است و پوشه فایل‌ها را هم باید شامل شود.
 
+## API (فعلاً فقط احراز هویت)
+مسیرها زیر `/api/v1/auth`: `login`، `change-password`، `logout`، `me`، `sessions`.
+- رشته اتصال: `ConnectionStrings__Sepehr` (متغیر محیطی) یا `appsettings.json`؛ رمز را در مخزن نگذارید.
+- فقط HTTPS پذیرفته می‌شود و گواهی باید روی سرور تنظیم شده باشد.
+- هنوز ابزار ساخت اولین مدیرکل (T-012) وجود ندارد؛ بنابراین برای استفاده واقعی آماده نیست.
+
 ## ساختار
-- `src/`: Shared و Contracts (netstandard2.0)، Domain و Infrastructure (net10.0)
+- `src/`: Shared و Contracts (netstandard2.0)، Domain، Application، Infrastructure و Api (net10.0)
 - `database/`: Migration و آزمون قیود
 - `tests/`: آزمون‌ها
 - `assets/fonts/vazirmatn/`: فونت و مجوز OFL
