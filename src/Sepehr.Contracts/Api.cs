@@ -9,6 +9,7 @@ namespace Sepehr.Contracts
         public const string ChangePassword = Base + "/auth/change-password";
         public const string Logout = Base + "/auth/logout";
         public const string Me = Base + "/auth/me";
+        public const string Sessions = Base + "/auth/sessions";
         public const string Sync = Base + "/sync";
     }
 
@@ -49,6 +50,43 @@ namespace Sepehr.Contracts
     {
         public string CurrentPassword { get; set; } = string.Empty;
         public string NewPassword { get; set; } = string.Empty;
+    }
+
+    public sealed class MeResponse
+    {
+        public long UserId { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string DisplayName { get; set; } = string.Empty;
+        public bool MustChangePassword { get; set; }
+        public string[] GlobalRoles { get; set; } = new string[0];
+    }
+
+    public sealed class SessionInfo
+    {
+        public Guid SessionId { get; set; }
+        public DateTime CreatedAtUtc { get; set; }
+        public DateTime LastActivityAtUtc { get; set; }
+        public DateTime AbsoluteExpiresAtUtc { get; set; }
+        public string? DeviceInfo { get; set; }
+        public bool IsCurrent { get; set; }
+    }
+
+    public static class ErrorCodes
+    {
+        public const string InvalidRequest = "InvalidRequest";
+        public const string InvalidCredentials = "InvalidCredentials";
+        public const string AccountLocked = "AccountLocked";
+        public const string TooManyRequests = "TooManyRequests";
+        public const string Unauthorized = "Unauthorized";
+        public const string Forbidden = "Forbidden";
+        public const string PasswordChangeRequired = "PasswordChangeRequired";
+        public const string CurrentPasswordIncorrect = "CurrentPasswordIncorrect";
+        public const string PasswordTooShort = "PasswordTooShort";
+        public const string PasswordTooLong = "PasswordTooLong";
+        public const string PasswordSameAsPersonnelCode = "PasswordSameAsPersonnelCode";
+        public const string PasswordSameAsCurrent = "PasswordSameAsCurrent";
+        public const string HttpsRequired = "HttpsRequired";
+        public const string InternalError = "InternalError";
     }
 
     public sealed class SendMessageRequest

@@ -23,7 +23,9 @@ namespace Sepehr.Tests.Unit
         [InlineData("Sepehr.Domain", "")]
         [InlineData("Sepehr.Shared", "")]
         [InlineData("Sepehr.Contracts", "")]
+        [InlineData("Sepehr.Application", "Sepehr.Domain")]
         [InlineData("Sepehr.Infrastructure", "Sepehr.Application,Sepehr.Domain")]
+        [InlineData("Sepehr.Api", "Sepehr.Application,Sepehr.Contracts,Sepehr.Infrastructure")]
         public void Project_references_follow_dependency_rule(string project, string allowedList)
         {
             var path = Path.Combine(RepositoryRoot(), "src", project, project + ".csproj");
